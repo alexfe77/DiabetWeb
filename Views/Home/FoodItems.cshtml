@@ -1,0 +1,29 @@
+@model HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Food items";
+}
+
+<div><a class="btn btn-primary" asp-action="AddFoodItem">Add Food Item</a></div>
+<table class="table table-hover table-condensed table-striped table-bordered">
+    <caption>Food Items</caption>
+    <thead>
+		<tr>
+			<th scope="col"></th>
+			<th scope="col">#Details</th>
+			<th scope="col">Name</th>
+			<th scope="col">Favorites</th>
+			<th scope="col">Protein</th>
+			<th scope="col">Fat</th>
+			<th scope="col">Carbohydrates</th>
+		</tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FoodItems)
+        {
+            @Html.Partial("_Summary", item)
+        }
+    </tbody>
+</table>
+
+<div><a class="btn btn-primary" asp-action="AddFoodItem">Add Food Item</a></div>

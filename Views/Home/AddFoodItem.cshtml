@@ -1,0 +1,63 @@
+﻿@model FoodItem
+
+@{ 
+    ViewBag.Title = "Add Food Item";
+}
+
+<form method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div>
+        <label asp-for="Protein"></label>
+        <input asp-for="Protein" />
+        <span asp-validation-for="Protein"></span>
+    </div>
+
+    <div>
+        <label asp-for="Fat"></label>
+        <input asp-for="Fat" />
+        <span asp-validation-for="Fat"></span>
+    </div>
+
+    <div>
+        <label asp-for="Carbohydrates"></label>
+        <input asp-for="Carbohydrates" />
+        <span asp-validation-for="Carbohydrates"></span>
+    </div>
+
+    <div>
+        <label asp-for="GlycemicIndex"></label>
+        <input asp-for="GlycemicIndex" />
+        <span asp-validation-for="GlycemicIndex"></span>
+    </div>
+
+    <div>
+        <label asp-for="Attribute"></label>
+        <input asp-for="Attribute" />
+        <span asp-validation-for="Attribute"></span>
+    </div>
+
+    <div>
+        <label asp-for="Category"></label>
+        <select asp-for="Category" asp-items="@Html.GetEnumSelectList<FoodCategory>()"></select>
+        <span asp-validation-for="Category"></span>
+    </div>
+
+    <div>
+        <label asp-for="Favorites"></label>
+        <input asp-for="Favorites" />
+        <span asp-validation-for="Favorites"></span>
+    </div>
+
+    <input class="btn btn-primary" type="submit" name="save" value="Add Food Item" />
+</form>

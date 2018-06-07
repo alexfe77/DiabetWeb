@@ -1,0 +1,17 @@
+@model FoodItem
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<tr>
+	<td>
+		<a class="btn btn-default btn-sm" asp-page="/FoodItems/UpdateFoodItem" asp-route-id="@Model.Id">Update</a>
+		<!--a class="btn btn-warning btn-sm" asp-action="Update2FoodItem" asp-route-id="@Model.Id">Update</a-->
+	</td>
+	<td><a class="btn-link" asp-action="FoodItemDetails" asp-route-id="@Model.Id"><font color="gray">@Model.Id</font></a></td>
+	<td>@Model.Name</td>
+	<td>@Model.Favorites</td>
+	<td>@Model.Protein</td>
+	<td>@Model.Fat</td>
+	<td>@Model.Carbohydrates</td>
+</tr>

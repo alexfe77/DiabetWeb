@@ -1,0 +1,21 @@
+﻿@model FoodItem
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+
+<div><label asp-for="Id"></label>:@Model.Id</div>
+<div><label asp-for="Name"></label>:@Model.Name</div>
+<div><label asp-for="Description"></label>:@Model.Description</div>
+<div><label asp-for="Protein"></label>:@Model.Protein</div>
+<div><label asp-for="Fat"></label>:@Model.Fat</div>
+<div><label asp-for="Carbohydrates"></label>:@Model.Carbohydrates</div>
+<div><label asp-for="GlycemicIndex"></label>:@Model.GlycemicIndex</div>
+<div><label asp-for="Attribute"></label>:@Model.Attribute</div>
+<div><label asp-for="Category"></label>:@Model.Category</div>
+<div><label asp-for="Favorites"></label>:<strong>@Model.Favorites</strong></div>
+<div><label asp-for="EnergyKJ"></label>:<strong>@Model.EnergyKJ</strong></div>
+<div><label asp-for="EnergyKC"></label>:<strong>@Model.EnergyKC</strong></div>
+
+<div><a class="btn-sm btn-primary" asp-action="AddFoodItem">Add Food Item</a> <a class="btn-sm btn-primary" asp-page="/FoodItems/UpdateFoodItem" asp-route-id="@Model.Id">Update</a> <a class="btn-sm btn-primary" asp-action="FoodItems">List</a></div>

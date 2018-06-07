@@ -1,0 +1,38 @@
+@model HomeSelectViewModel
+@{
+	ViewBag.Title = "Select items";
+}
+<div>
+	<form method="post" id="selectionForm">
+		<div class="container-fluid" style="padding-bottom:7px;">
+			<div class="row">
+				<div class="col-sm-3" style="padding-top:5px;">
+					<span tooltip="Number from 0 to 10. 0 is most used, 10 is least used. For example, 3 would include 0,1,2,3">Favorites:</span>
+					<input asp-for="@Model.GetFavorite" style="width:60px;" />
+					<span asp-validation-for="@Model.GetFavorite"></span>
+				</div>
+				<div class="col-sm-3" style="padding-top:5px;">
+					<span>Name like:</span>
+					<input id="textFilter" style="width:120px;" />
+				</div>
+				<div class="col-sm-6" style="padding-top:5px;">
+					<input class="btn btn-warning" type="submit" id="submit" name="submit" value="Set Favorites"
+						   tooltip="This would set the following favorites to the selected items" />
+					<input asp-for="@Model.SetFavorite" style="width:60px;" />
+					<span asp-validation-for="@Model.SetFavorite"></span>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid" style="padding-bottom:7px;">
+			@Html.ListBoxFor(f => f.SelectedItemIds, Model.FoodItems.Where(i => (i.Favorites >= Model.GetFavorite || i.Favorites == 0 || i.Favorites == null)).Select(fi => new SelectListItem { Value = fi.Id.ToString(), Text = fi.Name + " (" + fi.Favorites + ")" }), new { @class = "form-control", @size = "18" })
+		</div>
+		<div class="container-fluid">
+			<input class="btn btn-primary" type="submit" id="submit" name="submit" value="Add and Stay" />
+			<input class="btn btn-primary" type="submit" id="submit" name="submit" value="Add and Calc" />
+			<div class="container-fluid" style="padding-top:10px;">
+				<br />
+			</div>
+			<input class="btn btn-warning" type="submit" id="submit" name="submit" value="Remove/Add and Calc" />
+		</div>
+	</form>
+</div>

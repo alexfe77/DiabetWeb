@@ -1,0 +1,68 @@
+﻿@page "{id}"
+@using DiabetWeb.Pages.FoodItems;
+
+@model UpdateModel
+
+<h3>Update FoodItem <font color="gray">@Model.FoodItem.Id</font>. @Model.FoodItem.Name</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="FoodItem.Id" />
+    <input class="btn btn-warning" type="submit" id="delete" name="delete" value="Delete" />
+    <div>
+        <label asp-for="FoodItem.Name"></label>
+        <input asp-for="FoodItem.Name" />
+        <span asp-validation-for="FoodItem.Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Description"></label>
+        <input asp-for="FoodItem.Description" />
+        <span asp-validation-for="FoodItem.Description"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Protein"></label>
+        <input asp-for="FoodItem.Protein" />
+        <span asp-validation-for="FoodItem.Protein"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Fat"></label>
+        <input asp-for="FoodItem.Fat" />
+        <span asp-validation-for="FoodItem.Fat"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Carbohydrates"></label>
+        <input asp-for="FoodItem.Carbohydrates" />
+        <span asp-validation-for="FoodItem.Carbohydrates"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.GlycemicIndex"></label>
+        <input asp-for="FoodItem.GlycemicIndex" />
+        <span asp-validation-for="FoodItem.GlycemicIndex"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Attribute"></label>
+        <input asp-for="FoodItem.Attribute" />
+        <span asp-validation-for="FoodItem.Attribute"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Category"></label>
+        <select asp-for="FoodItem.Category" asp-items="@Html.GetEnumSelectList<FoodCategory>()"></select>
+        <span asp-validation-for="FoodItem.Category"></span>
+    </div>
+
+    <div>
+        <label asp-for="FoodItem.Favorites"></label>
+        <input asp-for="FoodItem.Favorites" />
+        <span asp-validation-for="FoodItem.Favorites"></span>
+    </div>
+
+    <br />
+    <input class="btn btn-primary" type="submit" id="update" name="update" value="Update" />
+    <a class="btn btn-default" asp-action="FoodItems">List</a>
+</form>

@@ -1,0 +1,134 @@
+@model MealItemViewModel[]
+
+@{
+	ViewBag.Title = "Diabet Calc";
+}
+
+@if ((Model == null) || (Model.Length == 0))
+{
+	<div class="label-warning">Meal is not selected.</div>
+	<a class="btn-link" href="/Home/FoodSelect">Please select</a>
+}
+else
+{
+	<form method="post" class="form-group">
+		<input type="hidden" asp-for="@Model[0].MemberItem.Id" />
+		<input type="hidden" asp-for="@Model[0].MemberItem.MemberLogin" />
+		<input type="hidden" asp-for="@Model[0].MemberItem.Name" />
+
+		<div class="container-fluid left" style="background-color: rgb(250, 250, 255); padding-top:5px; padding-bottom:5px;">
+			<div class="row">
+				<div class="col-xs-4">
+					<label data-toggle="tooltip" title="Parameter K1" asp-for="@Model[0].MemberItem.K1"></label>:
+					<input asp-for="@Model[0].MemberItem.K1" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.K1"></span>
+				</div>
+				<div class="col-xs-4">
+					<label asp-for="@Model[0].MemberItem.K2"></label>:
+					<input asp-for="@Model[0].MemberItem.K2" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.K2"></span>
+				</div>
+				<div class="col-xs-4">
+					<label asp-for="@Model[0].MemberItem.K3"></label>:
+					<input asp-for="@Model[0].MemberItem.K3" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.K3"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4">
+					<label asp-for="@Model[0].MemberItem.F1"></label>:
+					<input asp-for="@Model[0].MemberItem.F1" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.F1"></span>
+				</div>
+				<div class="col-xs-4">
+					<label asp-for="@Model[0].MemberItem.F2"></label>:
+					<input asp-for="@Model[0].MemberItem.F2" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.F2"></span>
+				</div>
+				<div class="col-xs-4">
+					<label asp-for="@Model[0].MemberItem.F3"></label>:
+					<input asp-for="@Model[0].MemberItem.F3" size="4" />
+					<span asp-validation-for="@Model[0].MemberItem.F3"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid left">
+			<table class="container-fluid" align="left" style="background-color:rgb(250, 250, 255);">
+				@for (var i = 0; i < Model.Length; i++)
+				{
+					if (i > 0)
+					{
+						<input type="hidden" asp-for="@Model[i].MemberItem.Id" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.MemberLogin" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.Name" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.K1" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.K2" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.K3" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.F1" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.F2" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.F3" />
+						<input type="hidden" asp-for="@Model[i].MemberItem.Dose" />
+					}
+					<input type="hidden" asp-for="@Model[i].Id" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Id" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Name" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Description" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Protein" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Fat" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Carbohydrates" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.GlycemicIndex" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Attribute" />
+					<input type="hidden" asp-for="@Model[i].FoodItem.Category" />
+
+					<tr style="font-weight:bold;">
+						<td class="col-xs-7" style="border-right:none;border-left:none;border-bottom:groove;border-top:groove;">
+							@Model[i].FoodItem.Name
+							<a class="text-muted small" asp-page="/FoodItems/UpdateFoodItem" asp-route-id="@Model[i].FoodItem.Id">(f=@Model[i].FoodItem.Fat, p=@Model[i].FoodItem.Protein, c=@Model[i].FoodItem.Carbohydrates)</a>
+						</td>
+						<td class="col-xs-2" style="border-right:none;border-left:none;padding-bottom:3px;padding-top:3px;border-bottom:groove;border-top:groove;">
+							<input asp-for="@Model[i].Weight" style="width:100px" />
+							<span asp-validation-for="@Model[i].Weight" />
+						</td>
+						<td class="col-xs-2" style="border-right:none;border-left:none;padding-bottom:3px;padding-top:3px;border-bottom:groove;border-top:groove;">
+							<span class="text-muted small">dose: </span>@Model[i].DosePart
+						</td>
+						<td class="col-xs-1" style="border-right:none;border-left:none;border-bottom:groove;border-top:groove;" align="left">
+							<a asp-action="MealItemDelete" asp-route-id="@Model[i].Id" class="glyphicon glyphicon-remove"></a>
+						</td>
+					</tr>
+				}
+			</table> <!-- table for meal items -->
+		</div>
+		<div class="container-fluid" style="padding-top:10px;">
+			<a class="btn-sm btn-primary" asp-action="FoodSelect">Add More</a>
+			<a class="btn-sm btn-default" asp-action="AddMealAsFood">Register As Food</a>
+			<a class="btn-sm btn-default" id="Zeros">Zeros</a>
+		</div>
+		<div class="container-fluid" style="padding-top:10px;">
+			<br />
+		</div>
+		<div class="container-fluid" style="padding-top:10px;padding-bottom:5px;">
+			<div>
+				<input class="btn btn-danger" type="submit" name="save2" value="Calculate" />
+				<span class="text-dark btn-lg">DOSE:</span><span class="text-danger btn-lg" style="font-weight:bold;">@Model[0].MemberItem.Dose</span>
+			</div>
+			<div>
+				<span class="text-dark">Calories:</span>
+				<span class="text-danger">@Model[0].MemberItem.EnergyKC</span>
+			</div>
+			<div>
+				<span class="text-dark">Fats:</span>
+				<span class="text-danger">@Model[0].MemberItem.TotalFat</span>
+			</div>
+			<div>
+				<span class="text-dark">Proteins:</span>
+				<span class="text-danger">@Model[0].MemberItem.TotalProtein</span>
+			</div>
+			<div>
+				<span class="text-dark">Carbohydrates:</span>
+				<span class="text-danger">@Model[0].MemberItem.TotalCarbohydrates</span>
+			</div>
+		</div>
+	</form>
+}
